@@ -1,22 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import Button from './components/Button/Button'
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import Login from './pages/Login/Login'
 import Registered from './pages/Registered/Registered';
 import Layout from './components/Layout/Layout';
 import Header from './components/Header/Header';
-
+import Loading from './components/Loading/Loading'
+import { totalActions, IInitState } from './store/index';
+import { useSelector, useDispatch } from 'react-redux';
+import { userLogout } from './store/auth-actions';
 
 function App() {
+
+  const dispatch = useDispatch();
+  const auth = useSelector((state: IInitState) => state.auth);
+  const initRender = useSelector((state: IInitState) => state.initRender);
+
+
+  const handleLogout = () => {
+    dispatch(userLogout());
+  }
+
+
   return (
     <div className="App">
       <Layout maxWidth='1180px'>
-        <Header logoSrc="https://acy.com/images/common/logo.svg" />
+        {initRender &&
+          <Header logoSrc="https://acy.com/images/common/logo.svg" auth={auth} onLogout={handleLogout} />
+        }
 
-
+        {/* <Loading visible={true} /> */}
         <Route path="/login">
-          <Login />
+          {auth ? <Redirect to="/" /> : <Login />}
         </Route>
 
         <Route path="/Registered">

@@ -6,6 +6,7 @@ export const StyledLogin = styled.div`
 
     .inputGroup{
         .ld-input{
+            justify-content: center;
             >label{
                 width:70px;
             }

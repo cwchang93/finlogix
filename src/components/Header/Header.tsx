@@ -5,17 +5,18 @@ import { StyledHeader } from './style';
 import Button from '../Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { NavLink } from 'react-router-dom';
 
 export interface IHeaderProps extends ICommonProps {
     logoSrc?: string;
-    onLogin?: () => void;
+    // onLogin?: () => void;
     onLogout?: () => void;
     auth?: boolean;
 }
 
 const Header: React.FC<IHeaderProps> = (props) => {
 
-    const { logoSrc, onLogin, onLogout, auth, children } = props;
+    const { logoSrc, onLogout, auth, children } = props;
 
     return (
         <StyledHeader>
@@ -24,16 +25,18 @@ const Header: React.FC<IHeaderProps> = (props) => {
             </div>
 
             <div className="logoWrap">
-                <img src={logoSrc} />
+                <NavLink to="/">
+                    <img src={logoSrc} />
+                </NavLink>
             </div>
 
             <div className="middlePart">
                 {children}
             </div>
 
+
             <div className="authWrap">
-                {auth ? <Button onClick={onLogin}>Login</Button>
-                    : <Button onClick={onLogout}>Logout</Button>
+                {auth ? <Button onClick={onLogout}>Logout</Button> : <NavLink to="/login"><Button >Login</Button></NavLink>
                 }
             </div>
         </StyledHeader>

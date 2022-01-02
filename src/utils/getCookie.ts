@@ -11,7 +11,7 @@ export function getCookie(cookieName: string) {
     return null;
 }
 
-export function setCookie(name: string, value: string, expire_in: string, domain?: string) {
+export function setCookie(name: string, value: string, expire_in: number, domain?: string) {
     if (!!domain) {
         document.cookie = `${name}=${value};domain=${domain};path=/;max-age=${expire_in};`;
         return;
