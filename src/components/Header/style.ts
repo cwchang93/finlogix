@@ -10,6 +10,7 @@ export const StyledHeader = styled.div`
     display:grid;
     grid-template-columns: 40px auto 100px;
     align-items: center;
+    border-bottom: solid #F5F5F5 1px;
 
     .menuIcon{
         padding-left: 15px;
