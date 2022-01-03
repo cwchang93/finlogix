@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Login from './pages/Login/Login'
 import Registered from './pages/Registered/Registered';
+import Index from './pages/Index/Index';
 import Layout from './components/Layout/Layout';
 import Header from './components/Header/Header';
 import Loading from './components/Loading/Loading'
@@ -24,11 +25,14 @@ function App() {
   return (
     <div className="App">
       <Layout maxWidth='1180px'>
-        {initRender &&
-          <Header logoSrc="https://acy.com/images/common/logo.svg" auth={auth} onLogout={handleLogout} />
-        }
 
+        <Header logoSrc="https://acy.com/images/common/logo.svg" auth={auth} onLogout={handleLogout} />
         {/* <Loading visible={true} /> */}
+
+        <Route path="/">
+          <Index />
+        </Route>
+
         <Route path="/login">
           {auth ? <Redirect to="/" /> : <Login />}
         </Route>
@@ -36,6 +40,7 @@ function App() {
         <Route path="/Registered">
           <Registered />
         </Route>
+
       </Layout>
 
     </div>

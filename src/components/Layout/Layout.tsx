@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { getCookie } from '../../utils/getCookie';
 import { checkUser } from '../../store/auth-actions';
 import { totalActions } from '../../store/index';
+import { GlobalStyle } from '../../style/global_css'
 export interface ILayoutProps extends ICommonProps {
     maxWidth: string;
     children: React.ReactNode;
@@ -22,11 +23,6 @@ const Layout: React.FC<ILayoutProps> = (props) => {
             dispatch(checkUser());
         }
 
-        dispatch(totalActions.init())
-
-
-
-        // console.log(user);
     }, []);
 
 
@@ -35,6 +31,7 @@ const Layout: React.FC<ILayoutProps> = (props) => {
     return (
 
         <StyledLayout maxWidth={maxWidth}>
+            <GlobalStyle />
             {children}
         </StyledLayout>
 

@@ -1,6 +1,5 @@
 import { totalActions, IInitState } from './index';
 import { setCookie, getCookie } from '../utils/getCookie';
-import { useDispatch } from 'react-redux';
 
 export const fetchUserData = (email: string, password: string) => {
 

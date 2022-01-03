@@ -28,7 +28,6 @@ const totalSlice = createSlice({
         logout(state) {
             state.auth = false;
         },
-
     }
 });
 
