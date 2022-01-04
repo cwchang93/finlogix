@@ -25,6 +25,10 @@ export const StyledHeader = styled.div`
   .title {
     font-size: 16px;
     margin-bottom: 12px;
+
+    @media (min-width: 768px) {
+      min-height: 34px;
+    }
   }
 `;
 
