@@ -17,7 +17,7 @@ const RegisterCard: React.FC<IRegisterCardProps> = props => {
     const formatCreatedAt = dayjs(props.createdAt).add(10, 'days').format('YYYY/MM/DD hh:mm');
 
     return (
-        <StyledRegisterCard>
+        <StyledRegisterCard className="registeredCard">
             <StyledHeader>
                 <div className="createdAt">
                     {props.createdAt}

@@ -5,6 +5,8 @@ import { StyledContentVideo } from "./style";
 export interface IContentVideo extends ICommonProps {
   title?: string;
   content?: string;
+  videoSrc?: string;
+
 }
 
 const ContentVideo: React.FC<IContentVideo> = (props) => {

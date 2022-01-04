@@ -14,16 +14,34 @@ export const StyledCardSection = styled.section`
 `;
 
 export const StyledCardsWrap = styled.div`
-  grid-gap: 10px;
   display: flex;
   grid-gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
   padding: 0 20px;
 
+  .row{
+    .registeredCard{
+        margin-bottom:20px;
+      }
+  }
+
   @media (min-width: 768px) {
     padding: 0;
     max-width: 1180px;
     margin: auto;
+
+    display:block;
+    overflow: auto;
+    white-space: nowrap;
+
+    .row{
+      display: inline-block;
+      color: white;
+      text-align: center;
+      padding: 14px;
+      text-decoration: none;
+    
+    }
   }
 `;

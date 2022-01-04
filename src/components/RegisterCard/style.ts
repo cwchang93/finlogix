@@ -12,6 +12,10 @@ export const StyledRegisterCard = styled.div`
   width: 100%;
   max-width: 380px;
   background-color: #fff;
+
+  >div {
+    text-align: left;
+  }
 `;
 
 export const StyledHeader = styled.div`
