@@ -2,8 +2,14 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 export interface IInitState {
   auth?: boolean;
-  user?: any;
-  webinarLists?: any;
+  user?: object[] | null;
+  webinarLists?: object[] | null;
+}
+
+export interface IActionTypes {
+  login: string;
+  logout: string;
+  setWebinarLists: string;
 }
 
 const initialState: IInitState = {
@@ -22,6 +28,7 @@ const totalSlice = createSlice({
     },
     logout(state) {
       state.auth = false;
+      state.user = null;
     },
     setWebinarLists(state, action) {
       state.webinarLists = action.payload;

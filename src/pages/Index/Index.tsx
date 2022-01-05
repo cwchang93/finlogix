@@ -8,13 +8,14 @@ import { StyledCardsWrap, StyledCardSection, StyledVideoSect } from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import { totalActions, IInitState } from "../../store/index";
 import { fetchWebinarData } from "../../store/webnar-actions";
+import { useHistory } from 'react-router-dom'
 
 const Index = () => {
     const dispatch = useDispatch();
     const user = useSelector((state: IInitState) => state.user);
     const webinarList = useSelector((state: IInitState) => state.webinarLists);
     const [filteredWebinarData, setFilteredWebinarData] = React.useState<[]>([]);
-
+    const history = useHistory();
     const bannerText = {
         title: "Forex Webinars",
         content: `Whether you are new to foreign exchange trading or already have some
@@ -40,34 +41,19 @@ const Index = () => {
     //   setFilteredWebinarData(filteredWebinarList);
     // }, [webinarList]);
 
-    const renderWebinarList = (listData: any) => {
-        var groupSize = 2;
-        var rows = listData
-            .map(function (eachWebinar: any) {
-                // map content to html elements
-                const { title, content, created_at } = eachWebinar;
-                return (
-                    <RegisteredCard
-                        key={eachWebinar["id"]}
-                        createdAt={created_at}
-                        title={title}
-                        content={content}
-                    />
-                );
-            })
-            .reduce(function (r: any, element: any, index: number) {
-                // create element groups with size 3, result looks like:
-                // [[elem1, elem2, elem3], [elem4, elem5, elem6], ...]
-                index % groupSize === 0 && r.push([]);
-                r[r.length - 1].push(element);
-                return r;
-            }, [])
-            .map(function (rowContent: any) {
-                // surround every group with 'row'
-                return <div className="row">{rowContent}</div>;
-            });
-        return <StyledCardsWrap>{rows}</StyledCardsWrap>;
-    };
+
+    const handleRegister = (id: number) => {
+        console.log('id', id);
+
+        console.log('user', user);
+        if (!user) {
+            history.push('/login');
+        } else {
+            console.log('registered then!')
+        }
+
+
+    }
 
     return (
         <StyledIndex>
@@ -80,6 +66,7 @@ const Index = () => {
                             const { title, content, created_at } = eachWebinar;
                             return (
                                 <RegisteredCard
+                                    onClickRegister={handleRegister.bind(null, eachWebinar['id'])}
                                     key={eachWebinar["id"]}
                                     createdAt={created_at}
                                     title={title}

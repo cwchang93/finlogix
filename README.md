@@ -44,3 +44,35 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+```js
+    const renderWebinarList = (listData: any) => {
+        var groupSize = 2;
+        var rows = listData
+            .map(function (eachWebinar: any) {
+                // map content to html elements
+                const { title, content, created_at } = eachWebinar;
+                return (
+                    <RegisteredCard
+                        key={eachWebinar["id"]}
+                        createdAt={created_at}
+                        title={title}
+                        content={content}
+                    />
+                );
+            })
+            .reduce(function (r: any, element: any, index: number) {
+                // create element groups with size 3, result looks like:
+                // [[elem1, elem2, elem3], [elem4, elem5, elem6], ...]
+                index % groupSize === 0 && r.push([]);
+                r[r.length - 1].push(element);
+                return r;
+            }, [])
+            .map(function (rowContent: any) {
+                // surround every group with 'row'
+                return <div className="row">{rowContent}</div>;
+            });
+        return <StyledCardsWrap>{rows}</StyledCardsWrap>;
+    };
+```

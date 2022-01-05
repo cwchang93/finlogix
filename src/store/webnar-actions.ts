@@ -1,11 +1,15 @@
-import { totalActions, IInitState } from "./index";
-import { setCookie, getCookie } from "../utils/getCookie";
+import { totalActions, IInitState, IActionTypes } from "./index";
 
 // `${process.env.REACT_APP_REQUEST_URL}/posts?favourited=1&author=${userId}`,   favourite posts
 
+
+interface IWebinar {
+  type: IActionTypes['setWebinarLists'],
+  payload: Object[];
+}
+
 export const fetchWebinarData = (pageNum: number = 12) => {
-  return async (dispatch: any) => {
-    // return async (dispatch: (arg: IInitState) => IInitState) => {
+  return async (dispatch: (arg: IWebinar) => IWebinar) => {
     const fetchData = async () => {
       const response = await fetch(
         `${process.env.REACT_APP_REQUEST_URL}/posts?per_page=${pageNum}`,

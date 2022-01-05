@@ -1,10 +1,20 @@
-import { totalActions, IInitState } from './index';
+import { totalActions, IInitState, IActionTypes } from "./index";
 import { setCookie, getCookie } from '../utils/getCookie';
+
+interface IAuthLogin {
+    type: IActionTypes['login'],
+    payload: Object[];
+}
+interface IAuthLogout {
+    type: IActionTypes['logout'],
+    payload: undefined;
+}
+
+
 
 export const fetchUserData = (email: string, password: string) => {
 
-    return async (dispatch: any) => {
-        // return async (dispatch: (arg: IInitState) => IInitState) => {
+    return async (dispatch: (arg: IAuthLogin) => (IAuthLogin)) => {
         const fetchData = async () => {
             const response = await fetch(
                 `${process.env.REACT_APP_REQUEST_URL}/auth/email/login`
@@ -47,8 +57,7 @@ export const fetchUserData = (email: string, password: string) => {
 
 
 export const userLogout = () => {
-    return async (dispatch: any) => {
-        // return async (dispatch: (arg: IInitState) => IInitState) => {
+    return async (dispatch: (arg: IAuthLogout) => (IAuthLogout)) => {
         const logoutUser = async () => {
             const response = await fetch(
                 `${process.env.REACT_APP_REQUEST_URL}/auth/logout`
@@ -80,7 +89,7 @@ export const userLogout = () => {
 }
 
 export const checkUser = () => {
-    return async (dispatch: any) => {
+    return async (dispatch: (arg: IAuthLogin) => (IAuthLogin)) => {
         const response = await fetch(
             `${process.env.REACT_APP_REQUEST_URL}/auth/me`
             , {
