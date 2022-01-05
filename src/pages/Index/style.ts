@@ -20,28 +20,21 @@ export const StyledCardsWrap = styled.div`
   flex-wrap: wrap;
   padding: 0 20px;
 
-  .row{
-    .registeredCard{
-        margin-bottom:20px;
-      }
+  .ld-loading {
+    top: 70%;
   }
 
   @media (min-width: 768px) {
     padding: 0;
     max-width: 1180px;
     margin: auto;
-
-    display:block;
-    overflow: auto;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 720px;
     white-space: nowrap;
-
-    .row{
-      display: inline-block;
-      color: white;
-      text-align: center;
-      padding: 14px;
-      text-decoration: none;
-    
-    }
+    padding-bottom: 16px;
   }
 `;

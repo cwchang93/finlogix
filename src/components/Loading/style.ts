@@ -1,104 +1,105 @@
-import styled from 'styled-components';
-import { ILoadingProps } from './Loading';
-
+import styled from "styled-components";
+import { ILoadingProps } from "./Loading";
 
 export const StyledLoading = styled.div<ILoadingProps>`
-    position: relative;
-    display: inline-block;
-    visibility: ${props => (props.visible ? 'visible' : 'hidden')};
-    position: absolute;
-    left: 50%;
-    top: 30%;
-    
-    .loading {
-        display: inline-block;
-        position: relative;
+  position: relative;
+  display: inline-block;
+  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+  position: absolute;
+  left: 50%;
+  top: 50%;
 
-        &.large {
-            top: 38px;
-            left: 50px;
-            width: 20px;
-            height: 5px;
-        }
-        &.default {
-            top: 38px;
-            left: 48px;
-            width: 12px;
-            height: 4px;
-        }
-        div {
-            position: relative;
-            transform-origin: 41px 40px;
-            animation: loading 1.2s linear infinite;
-            :after {
-                content: '';
-                display: block;
-                position: absolute;
-                top: 60px;
-                left: 60px;
-                width: 18px;
-                height: 18px;
-                border-radius: 50%;
-                background: ${props => (props.bgColor ? props.bgColor : '#989898')};
-            }
-            &:after {
-                .large {
-                    top: 38px;
-                    left: 50px;
-                    width: 20px;
-                    height: 5px;
-                }
-                .default {
-                    top: 38px;
-                    left: 48px;
-                    width: 12px;
-                    height: 4px;
-                }
-            }
-        }
-        div:nth-child(1) {
-            transform: rotate(0deg);
-            animation-delay: -1.1s;
-        }
-        div:nth-child(2) {
-            transform: rotate(45deg);
-            animation-delay: -1s;
-        }
-        div:nth-child(3) {
-            transform: rotate(90deg);
-            animation-delay: -0.9s;
-        }
-        div:nth-child(4) {
-            transform: rotate(135deg);
-            animation-delay: -0.8s;
-        }
-        div:nth-child(5) {
-            transform: rotate(180deg);
-            animation-delay: -0.7s;
-        }
-        div:nth-child(6) {
-            transform: rotate(225deg);
-            animation-delay: -0.6s;
-        }
-        div:nth-child(7) {
-            transform: rotate(270deg);
-            animation-delay: -0.5s;
-        }
-        div:nth-child(8) {
-            transform: rotate(315deg);
-            animation-delay: -0.4s;
-        }
-        div:nth-child(9) {
-            transform: rotate(360deg);
-            animation-delay: -0.3s;
-        }
+  .loading {
+    display: inline-block;
+    position: relative;
+    left: -40px;
+    top: -40px;
+
+    &.large {
+      top: 38px;
+      left: 50px;
+      width: 20px;
+      height: 5px;
     }
-    @keyframes loading {
-        0% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0;
-        }
+    &.default {
+      top: 38px;
+      left: 48px;
+      width: 12px;
+      height: 4px;
     }
+    div {
+      position: relative;
+      transform-origin: 41px 40px;
+      animation: loading 1.2s linear infinite;
+      :after {
+        content: "";
+        display: block;
+        position: absolute;
+        /* top: 60px;
+                left: 60px; */
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: ${(props) => (props.bgColor ? props.bgColor : "#989898")};
+      }
+      &:after {
+        .large {
+          top: 38px;
+          left: 50px;
+          width: 20px;
+          height: 5px;
+        }
+        .default {
+          top: 38px;
+          left: 48px;
+          width: 12px;
+          height: 4px;
+        }
+      }
+    }
+    div:nth-child(1) {
+      transform: rotate(0deg);
+      animation-delay: -1.1s;
+    }
+    div:nth-child(2) {
+      transform: rotate(45deg);
+      animation-delay: -1s;
+    }
+    div:nth-child(3) {
+      transform: rotate(90deg);
+      animation-delay: -0.9s;
+    }
+    div:nth-child(4) {
+      transform: rotate(135deg);
+      animation-delay: -0.8s;
+    }
+    div:nth-child(5) {
+      transform: rotate(180deg);
+      animation-delay: -0.7s;
+    }
+    div:nth-child(6) {
+      transform: rotate(225deg);
+      animation-delay: -0.6s;
+    }
+    div:nth-child(7) {
+      transform: rotate(270deg);
+      animation-delay: -0.5s;
+    }
+    div:nth-child(8) {
+      transform: rotate(315deg);
+      animation-delay: -0.4s;
+    }
+    div:nth-child(9) {
+      transform: rotate(360deg);
+      animation-delay: -0.3s;
+    }
+  }
+  @keyframes loading {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 `;

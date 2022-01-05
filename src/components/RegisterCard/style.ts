@@ -13,8 +13,16 @@ export const StyledRegisterCard = styled.div`
   max-width: 380px;
   background-color: #fff;
 
-  >div {
+  box-sizing: border-box;
+  box-shadow: 1px 2px 6px rgb(219 219 219 / 50%);
+  border-radius: 4px;
+
+  > div {
     text-align: left;
+  }
+
+  @media (min-width: 768px) {
+    height: 340px;
   }
 `;
 
@@ -29,6 +37,11 @@ export const StyledHeader = styled.div`
   .title {
     font-size: 16px;
     margin-bottom: 12px;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    white-space: normal;
 
     @media (min-width: 768px) {
       min-height: 34px;
