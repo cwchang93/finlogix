@@ -1,20 +1,39 @@
 import * as React from "react";
 import { ICommonProps } from "../../utils";
-import { StyledContentVideo } from "./style";
+import { StyledContentVideo, StyledContentWrap, StyledVideoWrap } from "./style";
 
 export interface IContentVideo extends ICommonProps {
   title?: string;
-  content?: string;
+  children?: React.ReactNode;
   videoSrc?: string;
-
+  moreLink?: string;
 }
 
 const ContentVideo: React.FC<IContentVideo> = (props) => {
   console.log(props);
+  const { title, children, videoSrc, moreLink } = props;
   return (
-    <StyledContentVideo>
-      <h2> {props.title} </h2>
-      <p>{props.content}</p>
+    <StyledContentVideo className="contentVideo">
+      <StyledContentWrap>
+        <h2> {title} </h2>
+
+        {children}
+
+        <h4>
+          <a className="seeMoreLink" href={moreLink}>
+            See more
+            <i className="arrowRight"></i>
+          </a>
+        </h4>
+      </StyledContentWrap>
+
+      <StyledVideoWrap>
+        <iframe src={videoSrc}>
+        </iframe>
+      </StyledVideoWrap>
+
+
+
     </StyledContentVideo>
   );
 };

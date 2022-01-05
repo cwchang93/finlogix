@@ -37,3 +37,24 @@ export const StyledCardsWrap = styled.div`
     white-space: nowrap;
   }
 `;
+
+
+export const StyledVideoSect = styled.section`
+
+  padding:60px 20px;
+
+  .contentVideo{
+    align-items: center;
+    @media (min-width: 768px) {
+      display: grid;
+      grid-template-columns: 440px 580px;
+      grid-gap: 50px;
+      padding:135px 0;
+      align-items: flex-start;
+      justify-content: space-between;
+      
+    }
+
+  }
+
+`
