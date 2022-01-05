@@ -66,7 +66,7 @@ const Index = () => {
       <TopBanner {...bannerText} />
 
       <StyledCardSection className="cardSection">
-        <StyledCardsWrap>
+        <StyledCardsWrap className="cardsWrap">
           {webinarList ? (
             webinarList.map((eachWebinar: any, i: number) => {
               const { title, content, created_at } = eachWebinar;

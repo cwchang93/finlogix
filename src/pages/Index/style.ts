@@ -35,6 +35,5 @@ export const StyledCardsWrap = styled.div`
     flex-wrap: wrap;
     height: 720px;
     white-space: nowrap;
-    padding-bottom: 16px;
   }
 `;
