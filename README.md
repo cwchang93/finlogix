@@ -45,7 +45,7 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-```js
+```jsx
 const renderWebinarList = (listData: any) => {
   var groupSize = 2;
   var rows = listData
@@ -86,4 +86,13 @@ export const StyledLayout =
     padding-top: 80px;
   }
 `;
+
+// TODO
+// dispatch(
+//     uiActions.showNotification({
+//         status: 'error',
+//         title: 'Error!',
+//         message: 'Fetching webinar data failed!',
+//     })
+// );
 ```

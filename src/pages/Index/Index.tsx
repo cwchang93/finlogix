@@ -15,7 +15,7 @@ import {
   StyledFormSect,
 } from "./style";
 import { useSelector, useDispatch } from "react-redux";
-import { totalActions, IInitState } from "../../store/index";
+import { IInitState } from "../../store/index";
 import { fetchWebinarData } from "../../store/webnar-actions";
 import { useHistory } from "react-router-dom";
 
@@ -45,7 +45,6 @@ const Index = () => {
   };
 
   React.useEffect(() => {
-    console.log("user", user);
     dispatch(fetchWebinarData(12));
   }, []);
 
@@ -57,13 +56,10 @@ const Index = () => {
   // }, [webinarList]);
 
   const handleRegister = (id: number) => {
-    console.log("id", id);
-
-    console.log("user", user);
     if (!user) {
       history.push("/login");
     } else {
-      console.log("registered then!");
+      console.log("registered!");
     }
   };
 

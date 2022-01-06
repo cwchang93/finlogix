@@ -1,10 +1,7 @@
-import { totalActions, IInitState, IActionTypes } from "./index";
-
-// `${process.env.REACT_APP_REQUEST_URL}/posts?favourited=1&author=${userId}`,   favourite posts
-
+import { totalActions, IActionTypes } from "./index";
 
 interface IWebinar {
-  type: IActionTypes['setWebinarLists'],
+  type: IActionTypes["setWebinarLists"];
   payload: Object[];
 }
 
@@ -19,7 +16,6 @@ export const fetchWebinarData = (pageNum: number = 12) => {
           },
         }
       );
-      console.log("res", response);
 
       if (!response.ok) {
         throw new Error("Could not fetch WebinarData data!");
@@ -32,17 +28,9 @@ export const fetchWebinarData = (pageNum: number = 12) => {
 
     try {
       const webinarData = await fetchData();
-      console.log("webinarData", webinarData.data);
       dispatch(totalActions.setWebinarLists(webinarData.data));
     } catch (error) {
       console.log("err", error);
-      // dispatch(
-      //     uiActions.showNotification({
-      //         status: 'error',
-      //         title: 'Error!',
-      //         message: 'Fetching cart data failed!',
-      //     })
-      // );
     }
   };
 };
