@@ -58,8 +58,10 @@ export const StyledFormSect = styled.section`
   &.formSect {
     max-width: 1180px;
     margin: auto;
-
     padding-top: 50px;
+    .inputGroup{
+      height: 360px;
+    }
     @media (min-width: 768px) {
       padding-bottom: 50px;
       border: 1px solid #dbdbdb;
@@ -80,6 +82,15 @@ export const StyledFormSect = styled.section`
         .input {
           width: 100%;
         }
+      }
+    }
+
+    .msgWrap{
+      text-align:left;
+      margin-bottom: 10px;
+    margin-top: -10px;
+      .errMsg{
+        color:red;
       }
     }
 

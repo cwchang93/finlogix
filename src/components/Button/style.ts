@@ -55,11 +55,11 @@ const typeMixin = () => {
         ${btnCSS('#ffffff', '#40a9ff', '#40a9ff')}
     }
 
-    &.xin {
-        background-color: #ff635e;
-        border-color: #ff635e;
+    &.fin {
+        background-color: #01254F;
+        border-color: #01254F;
         color: #ffffff;
-        ${btnCSS('#ffffff', '#ff7783', '#ff7783')}
+        ${btnCSS('#ffffff', '#01254F', '#01254F')}
     }
     `;
 };

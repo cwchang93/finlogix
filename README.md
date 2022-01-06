@@ -100,3 +100,12 @@ export const StyledLayout =
 ```sh
 npm install --save-dev @typescript-eslint/eslint-plugin
 ```
+
+```js
+
+  React.useEffect(() => {
+    const subscription = watch((value, { name, type }) => console.log(value, name, type));
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
+```

@@ -8,6 +8,7 @@ import GeneralForm from "../../components/GeneralForm/GeneralForm";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { useForm } from "react-hook-form";
+import cx from 'classnames'
 
 import {
   StyledCardsWrap,
@@ -20,19 +21,35 @@ import { IInitState } from "../../store/index";
 import { fetchWebinarData } from "../../store/webnar-actions";
 import { useHistory } from "react-router-dom";
 
+enum errorMsg {
+  inValid = 'This field is invalid!',
+  required = 'This field is required!'
+}
+interface IErrProps {
+  msg: errorMsg;
+}
+
+const ErrorMsg: React.FC<IErrProps> = (props) => {
+  return (
+    <div className="msgWrap">
+      <span className="errMsg">{props.msg}</span>
+    </div>
+  )
+}
+
 const Index = () => {
   const dispatch = useDispatch();
   const user = useSelector((state: IInitState) => state.user);
   const webinarList = useSelector((state: IInitState) => state.webinarLists);
-  const [filteredWebinarData, setFilteredWebinarData] = React.useState<[]>([]);
+  const [filteredWebinarData, setFilteredWebinarData] = React.useState<any>([]);
   const history = useHistory();
+
 
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+    formState,
+  } = useForm({ mode: "onChange" });
 
   const bannerText = {
     title: "Forex Webinars",
@@ -55,14 +72,18 @@ const Index = () => {
 
   React.useEffect(() => {
     dispatch(fetchWebinarData(12));
-  }, []);
+  }, [dispatch]);
 
-  // React.useEffect(() => {
-  //   const filteredWebinarList = webinarList.filter(
-  //     (eachWebinar: any) => eachWebinar.favourited
-  //   );
-  //   setFilteredWebinarData(filteredWebinarList);
-  // }, [webinarList]);
+
+
+  React.useEffect(() => {
+    const filteredWebinarList = webinarList && webinarList.filter(
+      (eachWebinar: any) => !eachWebinar.favourited
+    );
+    setFilteredWebinarData(filteredWebinarList);
+  }, [webinarList]);
+
+
 
   const handleRegister = (id: number) => {
     if (!user) {
@@ -73,7 +94,6 @@ const Index = () => {
   };
 
   const onSubmit = (data: any) => {
-    console.log("submit");
     console.log(data);
   };
 
@@ -83,8 +103,8 @@ const Index = () => {
 
       <StyledCardSection className="cardSection">
         <StyledCardsWrap className="cardsWrap">
-          {webinarList ? (
-            webinarList.map((eachWebinar: any, i: number) => {
+          {filteredWebinarData ? (
+            filteredWebinarData.map((eachWebinar: any, i: number) => {
               const { title, content, created_at } = eachWebinar;
               return (
                 <RegisteredCard
@@ -125,30 +145,38 @@ const Index = () => {
 
       <StyledFormSect className="formSect layoutContainer">
         <GeneralForm {...formText}>
-          <Input label="Topic" />
-          <Input
-            label="First Name"
-            {...register("firstName", { required: true })}
-          />
-          {errors.firstName && <span>This field is required</span>}
-          <Input
-            label="Last Name"
-            {...register("lastName", { required: true })}
-          />
-          <Input
-            label="Email"
-            {...register("email", {
-              required: true,
-              validate: (value: string) => value.includes("@"),
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "invalid email address",
-              },
-            })}
-          />
-          {errors.email && <span>It's not a valid email </span>}
+          <div className="inputGroup">
 
-          <Button className={"registerBtn"} onClick={handleSubmit(onSubmit)}>
+            <Input label="Topic" />
+            <Input
+              label={`First Name`}
+              {...register("firstName", { required: true })}
+            />
+            {formState.errors.firstName && <ErrorMsg msg={errorMsg.required} />
+            }
+            <Input
+              label="Last Name"
+              {...register("lastName", { required: true })}
+            />
+            {formState.errors.lastName && <ErrorMsg msg={errorMsg.required} />
+            }
+            <Input
+              label="Email"
+              {...register("email", {
+                required: true,
+                validate: (value: string) => value.includes("@"),
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: errorMsg.inValid,
+                },
+              })}
+            />
+            {formState.errors.email && <ErrorMsg msg={errorMsg.inValid} />}
+
+          </div>
+
+
+          <Button disabled={!formState.isValid} className={cx("registerBtn", "fin", { 'disabled': !formState.isValid })} onClick={handleSubmit(onSubmit)}>
             Register
           </Button>
         </GeneralForm>
