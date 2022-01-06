@@ -96,3 +96,7 @@ export const StyledLayout =
 //     })
 // );
 ```
+
+```sh
+npm install --save-dev @typescript-eslint/eslint-plugin
+```

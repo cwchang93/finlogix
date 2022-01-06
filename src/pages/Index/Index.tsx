@@ -7,6 +7,7 @@ import ContentVideo from "../../components/ContentVideo/ContentVideo";
 import GeneralForm from "../../components/GeneralForm/GeneralForm";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
+import { useForm } from "react-hook-form";
 
 import {
   StyledCardsWrap,
@@ -25,6 +26,14 @@ const Index = () => {
   const webinarList = useSelector((state: IInitState) => state.webinarLists);
   const [filteredWebinarData, setFilteredWebinarData] = React.useState<[]>([]);
   const history = useHistory();
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
   const bannerText = {
     title: "Forex Webinars",
     content: `Whether you are new to foreign exchange trading or already have some
@@ -61,6 +70,11 @@ const Index = () => {
     } else {
       console.log("registered!");
     }
+  };
+
+  const onSubmit = (data: any) => {
+    console.log("submit");
+    console.log(data);
   };
 
   return (
@@ -112,11 +126,31 @@ const Index = () => {
       <StyledFormSect className="formSect layoutContainer">
         <GeneralForm {...formText}>
           <Input label="Topic" />
-          <Input label="First Name" />
-          <Input label="Last Name" />
-          <Input label="Email" />
+          <Input
+            label="First Name"
+            {...register("firstName", { required: true })}
+          />
+          {errors.firstName && <span>This field is required</span>}
+          <Input
+            label="Last Name"
+            {...register("lastName", { required: true })}
+          />
+          <Input
+            label="Email"
+            {...register("email", {
+              required: true,
+              validate: (value: string) => value.includes("@"),
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "invalid email address",
+              },
+            })}
+          />
+          {errors.email && <span>It's not a valid email </span>}
 
-          <Button className={"registerBtn"}>Register</Button>
+          <Button className={"registerBtn"} onClick={handleSubmit(onSubmit)}>
+            Register
+          </Button>
         </GeneralForm>
       </StyledFormSect>
     </StyledIndex>
