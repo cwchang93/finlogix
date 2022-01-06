@@ -45,34 +45,45 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-
 ```js
-    const renderWebinarList = (listData: any) => {
-        var groupSize = 2;
-        var rows = listData
-            .map(function (eachWebinar: any) {
-                // map content to html elements
-                const { title, content, created_at } = eachWebinar;
-                return (
-                    <RegisteredCard
-                        key={eachWebinar["id"]}
-                        createdAt={created_at}
-                        title={title}
-                        content={content}
-                    />
-                );
-            })
-            .reduce(function (r: any, element: any, index: number) {
-                // create element groups with size 3, result looks like:
-                // [[elem1, elem2, elem3], [elem4, elem5, elem6], ...]
-                index % groupSize === 0 && r.push([]);
-                r[r.length - 1].push(element);
-                return r;
-            }, [])
-            .map(function (rowContent: any) {
-                // surround every group with 'row'
-                return <div className="row">{rowContent}</div>;
-            });
-        return <StyledCardsWrap>{rows}</StyledCardsWrap>;
-    };
+const renderWebinarList = (listData: any) => {
+  var groupSize = 2;
+  var rows = listData
+    .map(function (eachWebinar: any) {
+      // map content to html elements
+      const { title, content, created_at } = eachWebinar;
+      return (
+        <RegisteredCard
+          key={eachWebinar["id"]}
+          createdAt={created_at}
+          title={title}
+          content={content}
+        />
+      );
+    })
+    .reduce(function (r: any, element: any, index: number) {
+      // create element groups with size 3, result looks like:
+      // [[elem1, elem2, elem3], [elem4, elem5, elem6], ...]
+      index % groupSize === 0 && r.push([]);
+      r[r.length - 1].push(element);
+      return r;
+    }, [])
+    .map(function (rowContent: any) {
+      // surround every group with 'row'
+      return <div className="row">{rowContent}</div>;
+    });
+  return <StyledCardsWrap>{rows}</StyledCardsWrap>;
+};
+
+export const StyledLayout =
+  styled.div <
+  ILayoutProps >
+  `
+  padding-top: 60px;
+
+  @media screen and (min-width: 768px) {
+    /* padding: calc((100% - 1180px)/2); */
+    padding-top: 80px;
+  }
+`;
 ```

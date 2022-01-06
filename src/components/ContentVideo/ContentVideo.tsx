@@ -1,6 +1,10 @@
 import * as React from "react";
 import { ICommonProps } from "../../utils";
-import { StyledContentVideo, StyledContentWrap, StyledVideoWrap } from "./style";
+import {
+  StyledContentVideo,
+  StyledContentWrap,
+  StyledVideoWrap,
+} from "./style";
 
 export interface IContentVideo extends ICommonProps {
   title?: string;
@@ -10,15 +14,12 @@ export interface IContentVideo extends ICommonProps {
 }
 
 const ContentVideo: React.FC<IContentVideo> = (props) => {
-  console.log(props);
   const { title, children, videoSrc, moreLink } = props;
   return (
     <StyledContentVideo className="contentVideo">
       <StyledContentWrap>
         <h2> {title} </h2>
-
         {children}
-
         <h4>
           <a className="seeMoreLink" href={moreLink}>
             See more
@@ -28,12 +29,8 @@ const ContentVideo: React.FC<IContentVideo> = (props) => {
       </StyledContentWrap>
 
       <StyledVideoWrap>
-        <iframe src={videoSrc}>
-        </iframe>
+        <iframe src={videoSrc}></iframe>
       </StyledVideoWrap>
-
-
-
     </StyledContentVideo>
   );
 };

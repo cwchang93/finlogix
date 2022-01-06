@@ -35,8 +35,6 @@ export const StyledLoading = styled.div<ILoadingProps>`
         content: "";
         display: block;
         position: absolute;
-        /* top: 60px;
-                left: 60px; */
         width: 18px;
         height: 18px;
         border-radius: 50%;
