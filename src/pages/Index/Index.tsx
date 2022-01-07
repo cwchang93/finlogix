@@ -1,5 +1,4 @@
 import React from "react";
-import { StyledIndex } from "./style";
 import TopBanner from "../../components/TopBanner/TopBanner";
 import RegisteredCard from "../../components/RegisterCard/RegisterCard";
 import Loading from "../../components/Loading/Loading";
@@ -7,6 +6,8 @@ import ContentVideo from "../../components/ContentVideo/ContentVideo";
 import GeneralForm from "../../components/GeneralForm/GeneralForm";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
+import DropDown from "../../components/DropDown/DropDown";
+import Select from "../../components/Select/Select";
 import { useForm } from "react-hook-form";
 import cx from 'classnames'
 
@@ -15,6 +16,7 @@ import {
   StyledCardSection,
   StyledVideoSect,
   StyledFormSect,
+  StyledIndex
 } from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import { IInitState } from "../../store/index";
@@ -70,8 +72,11 @@ const Index = () => {
       "Please fill in the form below and you will be contacted within 1 working day by our professional business experts.",
   };
 
+
+
   React.useEffect(() => {
     dispatch(fetchWebinarData(12));
+    console.log('webinarList', webinarList)
   }, [dispatch]);
 
 
@@ -147,7 +152,8 @@ const Index = () => {
         <GeneralForm {...formText}>
           <div className="inputGroup">
 
-            <Input label="Topic" />
+            {/* <Input label="Topic" /> */}
+            {/* <Select data={[{ text: '1', value: 1 }, { text: '2', value: 2 }, { text: '3', value: 3 }]} /> */}
             <Input
               label={`First Name`}
               {...register("firstName", { required: true })}
