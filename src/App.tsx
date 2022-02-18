@@ -1,7 +1,8 @@
-import React from "react";
+import { Suspense } from "react";
 import { Route, Redirect } from "react-router-dom";
 import Login from "./pages/Login/Login";
-import Registered from "./pages/Registered/Registered";
+import Register from "./pages/Register/Register";
+import Translation from "./pages/Translation/Translation";
 import Index from "./pages/Index/Index";
 import Layout from "./components/Layout/Layout";
 import Header from "./components/Header/Header";
@@ -9,6 +10,10 @@ import Loading from "./components/Loading/Loading";
 import { totalActions, IInitState } from "./store/index";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogout } from "./store/auth-actions";
+
+import { useTranslation, initReactI18next } from "react-i18next";
+
+import "./i18n";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,8 +39,13 @@ function App() {
 
         <Route path="/login">{auth ? <Redirect to="/" /> : <Login />}</Route>
 
-        <Route path="/Registered">
-          <Registered />
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/translation">
+          <Suspense fallback={<Loading />}>
+            <Translation />
+          </Suspense>
         </Route>
       </Layout>
     </div>
