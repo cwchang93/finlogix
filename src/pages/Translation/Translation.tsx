@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import Button from "../../components/Button/Button";
+import Button from "components/Button/Button";
 
 interface IPropsTranslation {
   title?: string;

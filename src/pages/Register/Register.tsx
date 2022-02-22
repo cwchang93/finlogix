@@ -1,5 +1,5 @@
 import React from "react";
-import RegisterCard from "../../components/RegisterCard/RegisterCard";
+import RegisterCard from "components/RegisterCard/RegisterCard";
 import { StyledRegistered } from "./style";
 import { useSelector } from "react-redux";
 import { IInitState } from "../../store/index";

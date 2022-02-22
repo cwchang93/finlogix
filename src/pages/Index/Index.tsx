@@ -1,22 +1,22 @@
 import React from "react";
-import TopBanner from "../../components/TopBanner/TopBanner";
-import RegisteredCard from "../../components/RegisterCard/RegisterCard";
-import Loading from "../../components/Loading/Loading";
-import ContentVideo from "../../components/ContentVideo/ContentVideo";
-import GeneralForm from "../../components/GeneralForm/GeneralForm";
-import Input from "../../components/Input/Input";
-import Button from "../../components/Button/Button";
-import DropDown from "../../components/DropDown/DropDown";
-import Select from "../../components/Select/Select";
+import TopBanner from "components/TopBanner/TopBanner";
+import RegisteredCard from "components/RegisterCard/RegisterCard";
+import Loading from "components/Loading/Loading";
+import ContentVideo from "components/ContentVideo/ContentVideo";
+import GeneralForm from "components/GeneralForm/GeneralForm";
+import Input from "components/Input/Input";
+import Button from "components/Button/Button";
+import DropDown from "components/DropDown/DropDown";
+import Select from "components/Select/Select";
 import { useForm } from "react-hook-form";
-import cx from 'classnames'
+import cx from "classnames";
 
 import {
   StyledCardsWrap,
   StyledCardSection,
   StyledVideoSect,
   StyledFormSect,
-  StyledIndex
+  StyledIndex,
 } from "./style";
 import { useSelector, useDispatch } from "react-redux";
 import { IInitState } from "../../store/index";
@@ -24,8 +24,8 @@ import { fetchWebinarData } from "../../store/webnar-actions";
 import { useHistory } from "react-router-dom";
 
 enum errorMsg {
-  inValid = 'This field is invalid!',
-  required = 'This field is required!'
+  inValid = "This field is invalid!",
+  required = "This field is required!",
 }
 interface IErrProps {
   msg: errorMsg;
@@ -36,8 +36,8 @@ const ErrorMsg: React.FC<IErrProps> = (props) => {
     <div className="msgWrap">
       <span className="errMsg">{props.msg}</span>
     </div>
-  )
-}
+  );
+};
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -46,17 +46,12 @@ const Index = () => {
   const [filteredWebinarData, setFilteredWebinarData] = React.useState<any>([]);
   const history = useHistory();
 
-
-  const {
-    register,
-    handleSubmit,
-    formState,
-  } = useForm({ mode: "onChange" });
+  const { register, handleSubmit, formState } = useForm({ mode: "onChange" });
 
   const bannerText = {
     title: "Forex Webinars",
     content: `Whether you are new to foreign exchange trading or already have some
-             market experience, we believe that a solid FX trading education is vital 
+             market experience, we believe that a solid FX trading education is vital
              to your success as a trader.`,
   };
 
@@ -72,23 +67,17 @@ const Index = () => {
       "Please fill in the form below and you will be contacted within 1 working day by our professional business experts.",
   };
 
-
-
   React.useEffect(() => {
     dispatch(fetchWebinarData(12));
-    console.log('webinarList', webinarList)
+    console.log("webinarList", webinarList);
   }, [dispatch]);
 
-
-
   React.useEffect(() => {
-    const filteredWebinarList = webinarList && webinarList.filter(
-      (eachWebinar: any) => !eachWebinar.favourited
-    );
+    const filteredWebinarList =
+      webinarList &&
+      webinarList.filter((eachWebinar: any) => !eachWebinar.favourited);
     setFilteredWebinarData(filteredWebinarList);
   }, [webinarList]);
-
-
 
   const handleRegister = (id: number) => {
     if (!user) {
@@ -151,21 +140,18 @@ const Index = () => {
       <StyledFormSect className="formSect layoutContainer">
         <GeneralForm {...formText}>
           <div className="inputGroup">
-
             {/* <Input label="Topic" /> */}
             {/* <Select data={[{ text: '1', value: 1 }, { text: '2', value: 2 }, { text: '3', value: 3 }]} /> */}
             <Input
               label={`First Name`}
               {...register("firstName", { required: true })}
             />
-            {formState.errors.firstName && <ErrorMsg msg={errorMsg.required} />
-            }
+            {formState.errors.firstName && <ErrorMsg msg={errorMsg.required} />}
             <Input
               label="Last Name"
               {...register("lastName", { required: true })}
             />
-            {formState.errors.lastName && <ErrorMsg msg={errorMsg.required} />
-            }
+            {formState.errors.lastName && <ErrorMsg msg={errorMsg.required} />}
             <Input
               label="Email"
               {...register("email", {
@@ -178,11 +164,15 @@ const Index = () => {
               })}
             />
             {formState.errors.email && <ErrorMsg msg={errorMsg.inValid} />}
-
           </div>
 
-
-          <Button disabled={!formState.isValid} className={cx("registerBtn", "fin", { 'disabled': !formState.isValid })} onClick={handleSubmit(onSubmit)}>
+          <Button
+            disabled={!formState.isValid}
+            className={cx("registerBtn", "fin", {
+              disabled: !formState.isValid,
+            })}
+            onClick={handleSubmit(onSubmit)}
+          >
             Register
           </Button>
         </GeneralForm>
