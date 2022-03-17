@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import Button from "components/Button/Button";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Line } from "react-chartjs-2";
 
 interface IPropsTranslation {
@@ -10,19 +10,17 @@ interface IPropsTranslation {
 const Translation: React.FC<IPropsTranslation> = () => {
   const { t, i18n } = useTranslation();
 
+  const sectionRef = useRef<any>();
+
   const changeLangHandler = () => {
     const curLang = i18n.language;
     const newLang = curLang === "zh" ? "en" : "zh";
     i18n.changeLanguage(newLang);
   };
 
-  const fetchPrices = async () => {
-    const res = await fetch("https://api.coincap.io/v2/assets/?limit=5");
-    const data = await res.json();
-    return data;
+  const handleClickSection = () => {
+    console.log("handleClickSection");
   };
-
-  const [chartData, setChartData] = useState({});
 
   const data = {
     labels: [
@@ -64,31 +62,9 @@ const Translation: React.FC<IPropsTranslation> = () => {
     ],
   };
 
-  var options = {
-    legend: {
-      position: "right",
-      labels: {
-        boxWidth: 10,
-      },
-    },
-    scales: {
-      xAxes: [
-        {
-          ticks: { display: false },
-        },
-      ],
-    },
-  };
-
-  const pieData = {
-    labels: ["Red", "Blue", "Yellow"],
-    datasets: [
-      {
-        data: [300, 50, 100],
-        backgroundColor: ["rgba(255,0,0, 1)", "#36A2EB", "#FFCE56"],
-      },
-    ],
-  };
+  useEffect(() => {
+    sectionRef.current.click();
+  }, []);
 
   return (
     <>
@@ -99,39 +75,8 @@ const Translation: React.FC<IPropsTranslation> = () => {
         <Button onClick={changeLangHandler}>Toggle Language!</Button>
       </div>
 
-      <section>
+      <section ref={sectionRef} onClick={handleClickSection}>
         <div>Chart Section</div>
-        {/* {chartData && <Bar data={chartData} />} */}
-        {/* <Bar
-          data={{
-            labels: [1, 2, 3, 4, 5, 6, 7],
-            datasets: [
-              {
-                data: [65, 59, 80, 81, 56, 55, 40],
-                backgroundColor: [
-                  "rgba(255, 99, 132, 0.2)",
-                  "rgba(255, 159, 64, 0.2)",
-                  "rgba(255, 205, 86, 0.2)",
-                  "rgba(75, 192, 192, 0.2)",
-                  "rgba(54, 162, 235, 0.2)",
-                  "rgba(153, 102, 255, 0.2)",
-                  "rgba(201, 203, 207, 0.2)",
-                ],
-                borderColor: [
-                  "rgb(255, 99, 132)",
-                  "rgb(255, 159, 64)",
-                  "rgb(255, 205, 86)",
-                  "rgb(75, 192, 192)",
-                  "rgb(54, 162, 235)",
-                  "rgb(153, 102, 255)",
-                  "rgb(201, 203, 207)",
-                ],
-                borderWidth: 1,
-              },
-            ],
-          }}
-        /> */}
-
         <Line data={data} />
         <div></div>
       </section>
